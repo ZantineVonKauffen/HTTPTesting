@@ -1,0 +1,7 @@
+Laboratorio web 1: Sitios virtuales
+
+Contiene:
+
+- Subdirectorio `dns` con la configuración del servidor DNS
+
+- Subdirectorio `web` con la estructura para el servidor Web.

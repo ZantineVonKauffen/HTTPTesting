@@ -1,0 +1,20 @@
+; sistema.sol.dns
+;
+; Fernando Raya <fraya@ieszaidinvergeles.org>
+;
+$TTL	86400
+@	IN	SOA	tierra.sistema.sol. root.sistema.sol. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			  86400 )	; Negative Cache TTL
+;
+@	  IN	NS	tierra.sistema.sol.
+tierra.sistema.sol.    	  IN	A		192.168.57.103
+ns1.sistema.sol.	  	  IN	CNAME	tierra.sistema.sol.
+mercurio.sistema.sol.     IN    A       192.168.57.101
+apolo.sistema.sol.		  IN	CNAME	mercurio.sistema.sol.
+soyuz.sistema.sol.		  IN	CNAME	tierra.sistema.sol.
+www.sistema.sol.		  IN	CNAME	mercurio.sistema.sol.
+
