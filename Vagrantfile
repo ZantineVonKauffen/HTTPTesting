@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
     
     mercurio.vm.provision "apache", type: "shell", inline: <<-SHELL
       # Instalar apache2
-      sudo apt install apache2
+      sudo apt -y install apache2
       sudo cp -v /vagrant/dns/resolv.conf /etc
 
       # Copiar ficheros de configuración de apache2 que incluyen
@@ -76,26 +76,27 @@ Vagrant.configure("2") do |config|
       sudo cp -v /vagrant/web/soyuz.sistema.sol.conf /etc/apache2/sites-available/soyuz.sistema.sol.conf
       sudo cp -vR /vagrant/web/soyuz.sistema.sol /var/www/
       sudo cp -vR /vagrant/web/apolo.sistema.sol /var/www/
+      
       # Enlazamos el directorio raíz de nuestras webs dentro de el
       # servidor con la carpeta que tenemos fuera de la MV
 
-#      if ! [ -L /var/www/apolo.sistema.sol ]; then
-#       sudo rm -rf /var/www/apolo.sistema.sol 
-#       sudo ln -fs /vagrant/web/apolo.sistema.sol /var/www/apolo.sistema.sol
-#     fi
-#
-#     if ! [ -L /var/www/soyuz.sistema.sol ]; then
-#       sudo rm -rf /var/www/soyuz.sistema.sol
-#       sudo ln -fs /vagrant/web/soyuz.sistema.sol /var/www/soyuz.sistema.sol
-#     fi
-# 
+      if ! [ -L /var/www/apolo.sistema.sol ]; then
+       sudo rm -rf /var/www/apolo.sistema.sol 
+       sudo ln -fs /vagrant/web/apolo.sistema.sol /var/www/apolo.sistema.sol
+     fi
+
+     if ! [ -L /var/www/soyuz.sistema.sol ]; then
+       sudo rm -rf /var/www/soyuz.sistema.sol
+       sudo ln -fs /vagrant/web/soyuz.sistema.sol /var/www/soyuz.sistema.sol
+     fi
+ 
       # Habilitar los servidores virtuales
 
         sudo a2ensite apolo.sistema.sol.conf
         sudo a2ensite soyuz.sistema.sol.conf
 
       # Reiniciar el servicio  
-        systemctl restart apache2
+        sudo systemctl restart apache2
     SHELL
   end
 end
